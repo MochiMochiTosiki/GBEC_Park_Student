@@ -10,14 +10,11 @@ contract Student is ERC721Full, Ownable {
 
     constructor()ERC721Full(_name, _symbol) public {}
 
-    function mint(address to, string memory pictHash, uint256 amount) public payable onlyOwner {
-        require(to != msg.sender, "can only mint by snder");
-        _tokenId += 1;
+    function mint(address to, string memory pictHash) public payable onlyOwner {
+        require(to != msg.sender, "Owner can't hold NFT");
+        require(msg.value >= 500000000000000000, "don't enough ETH");
         _mint(to, _tokenId);
         _setTokenURI(_tokenId, pictHash);
     }
 
-    function check_eth_balance() private returns(bool) {
-        msg.value;
-    }
 }
